@@ -11,6 +11,10 @@ app.use(express.json());
 app.use('/', routes);
 
 const PORT = process.env.PORT || 4242;
+app.get('/', (req, res) => {
+  res.send('👋 Welcome to the Stripe POS Backend is Live!');
+});
+
 app.listen(PORT, () => {
     console.log(`✅ Server running on port ${PORT}`);
 });
