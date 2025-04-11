@@ -1,20 +1,25 @@
 const express = require('express');
-const cors = require('cors');
 const dotenv = require('dotenv');
-const routes = require('./index');
+const saleRoutes = require('./payment.routes');
+const paymentRoutes = require('./payment.routes');
 
 dotenv.config();
 
 const app = express();
-app.use(cors());
-app.use(express.json());
-app.use('/', routes);
+const PORT = process.env.PORT || 10000;
 
-const PORT = process.env.PORT || 4242;
+// Middleware
+app.use(express.json());
+
+// Base Route
 app.get('/', (req, res) => {
-  res.send('👋 Welcome to the Stripe POS Backend is Live!');
+  res.send('👋 Welcome to the Stripe-less POS Backend!');
 });
 
+// Payment API Routes
+app.use('/api/payment', paymentRoutes);
+
+// Start Server
 app.listen(PORT, () => {
-    console.log(`✅ Server running on port ${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
